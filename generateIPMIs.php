@@ -10,12 +10,33 @@ foreach(ipRange("172.16.0.2", "172.16.1.254") as $ip) {
     $result = "";
     $result = `$command`;
     if($result != "") {
-        file_put_contents("sourceIPMIs.txt", "ipaddress\t:\t$ip\n" . $result . "\n\n\n", FILE_APPEND);
+        $result = explode("\n", $result); //теперь это массив подстрок 
+        $product_strings = preg_grep("/^Product ID/", $result);
+        $ipmi_strings = preg_grep("/^IPMI Version/", $result);
+
+        // $ip = $ip_strings[0];
+        // $ip_strings = explode(":", $ip);
+        // $ip = trim($ip_strings[1]);
+
+        $product_id = $product_strings[6];
+        $product_strings = explode(":", $product_id);
+        $product_id = trim($product_strings[1]);
+        
+        $ipmi = $ipmi_strings[3];
+        $ipmi_strings = explode(":", $ipmi);
+        $ipmi = trim($ipmi_strings[1]);
+
+        
+        $str = "ipaddress:\t$ip;\t\tProduct ID:\t$product_id;\t\tIPMI Version:\t$ipmi;\n";
+        
+        file_put_contents("outputIPMIs.txt", $str, FILE_APPEND);
     } else {
-        file_put_contents("sourceIPMIs.txt", "ipaddress\t:\t$ip\nIPMI Version ???\nProduct ID ???" . "\n\n\n", FILE_APPEND);        
+        $str = "ipaddress:\t$ip;\t\tProduct ID:\t???;\t\tIPMI Version:\t???;\n";
+        file_put_contents("outputIPMIs.txt", $str, FILE_APPEND);        
     }
 }
 
-
+echo `cat outputIPMIs.txt`;
+echo "\n";
 echo "Work finished!\n";
 
