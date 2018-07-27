@@ -1,0 +1,24 @@
+ipaddress: 172.16.0.3
+Device ID                 : 32
+Device Revision           : 1
+Firmware Revision         : 3.66
+IPMI Version              : 2.0
+Manufacturer ID           : 10876
+Manufacturer Name         : Supermicro
+Product ID                : 2055 (0x0807)
+Product Name              : Unknown (0x807)
+Device Available          : yes
+Provides Device SDRs      : no
+Additional Device Support :
+    Sensor Device
+    SDR Repository Device
+    SEL Device
+    FRU Inventory Device
+    IPMB Event Receiver
+    IPMB Event Generator
+    Chassis Device
+Aux Firmware Rev Info     :
+    0x00
+    0x00
+    0x00
+    0x00
