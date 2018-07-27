@@ -1,4 +1,5 @@
 <?php
 
-file_put_contents("outputIPMIs.txt", `awk -f findIPMIs.awk sourceIPMIs.txt`);
+$command = 'awk -F":" -f findIPMIs.awk sourceIPMIs.txt';
+file_put_contents("outputIPMIs.txt", `$command`);
 echo `cat outputIPMIs.txt`;

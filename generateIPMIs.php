@@ -10,11 +10,12 @@ foreach(ipRange("172.16.0.2", "172.16.1.254") as $ip) {
     $result = "";
     $result = `$command`;
     if($result != "") {
-        file_put_contents("sourceIPMIs.txt", "ipaddress: $ip\n" . $result . "\n\n\n", FILE_APPEND);
+        file_put_contents("sourceIPMIs.txt", "ipaddress\t:\t$ip\n" . $result . "\n\n\n", FILE_APPEND);
     } else {
-        file_put_contents("sourceIPMIs.txt", "ipaddress: $ip\nIPMI Version ???\nProduct ID ???" . "\n\n\n", FILE_APPEND);        
+        file_put_contents("sourceIPMIs.txt", "ipaddress\t:\t$ip\nIPMI Version ???\nProduct ID ???" . "\n\n\n", FILE_APPEND);        
     }
 }
 
 
 echo "Work finished!\n";
+
