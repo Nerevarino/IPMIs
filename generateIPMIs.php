@@ -2,7 +2,7 @@
 
 include 'ip.php';
 
-file_put_contents("sourceIPMIs.txt", "");
+file_put_contents("outputIPMIs.txt", "");
 
 foreach(ipRange("172.16.0.2", "172.16.1.254") as $ip) {
     $command = "ipmitool -I lanplus -U ADMIN -P 21UfLv5ydYc212t -H $ip  mc info 1";
@@ -12,12 +12,10 @@ foreach(ipRange("172.16.0.2", "172.16.1.254") as $ip) {
     if($result != "") {
         $result = explode("\n", $result); //теперь это массив подстрок 
         $product_strings = preg_grep("/^Product ID/", $result);
-        $ipmi_strings = preg_grep("/^IPMI Version/", $result);
+        $ipmi_strings = preg_grep("/^IPMI Version/", $result);        
 
-        // $ip = $ip_strings[0];
-        // $ip_strings = explode(":", $ip);
-        // $ip = trim($ip_strings[1]);
 
+        
         $product_id = $product_strings[6];
         $product_strings = explode(":", $product_id);
         $product_id = trim($product_strings[1]);
@@ -31,7 +29,7 @@ foreach(ipRange("172.16.0.2", "172.16.1.254") as $ip) {
         
         file_put_contents("outputIPMIs.txt", $str, FILE_APPEND);
     } else {
-        $str = "ipaddress:\t$ip;\t\tProduct ID:\t???;\t\tIPMI Version:\t???;\n";
+        $str = "ipaddress:\t$ip;\t\tProduct ID:\t     ???     ;\t\tIPMI Version:\t???;\n";
         file_put_contents("outputIPMIs.txt", $str, FILE_APPEND);        
     }
 }
